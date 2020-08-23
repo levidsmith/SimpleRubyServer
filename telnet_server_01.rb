@@ -2,26 +2,22 @@
 require 'socket'
 
 puts "Simple Telnet Server"
-#strHostname = '127.0.0.1'
 iPort = 23
 
-#s = TCPSocket.open(strHostname, iPort)
 server = TCPServer.open(iPort)
 keepLooping = true
 while (keepLooping)
     client = server.accept
     puts "client connected"
-    client.puts(Time.now.ctime)
+    client.puts(Time.now.ctime + "\r")
 
     iCount = 10
     while (iCount > 0)
-        client.puts("Closing in #{iCount}")
+        client.puts("Closing in #{iCount}\r")
         iCount -= 1
         sleep(1)
     end
 
-
-
-    client.puts "Closing the connection"
+    client.puts "Closing the connection\r"
     client.close
 end
